@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0F172A">
+<meta name="description" content="مهامي - خطط، أنجز، وحقق أهدافك">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>مهامي</title>
+<style>
+:root{--navy:#0F172A;--blue:#2563EB;--slate:#64748B;--pale:#CBD5E1;--white:#F7F8FC;--ink:#183153;--muted:#71839e;--line:#e5ebf5;--shadow:0 12px 32px #18315318}
+*{box-sizing:border-box}body{margin:0;background:#eef3fb;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;padding-bottom:92px}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
+.app{max-width:520px;margin:auto;min-height:100vh;background:linear-gradient(180deg,#eaf1fc,#f8faff 45%);position:relative;overflow:hidden}
+.top{background:linear-gradient(145deg,#0F172A,#284a78);color:white;padding:22px 20px 28px;border-radius:0 0 30px 30px;box-shadow:0 10px 25px #0f172a25}
+.status{display:flex;justify-content:space-between;opacity:.8;font-size:12px;margin-bottom:22px;direction:ltr}
+.toprow{display:flex;align-items:center;justify-content:space-between}.brand{font-size:25px;font-weight:850;letter-spacing:-.5px}.hello{font-size:14px;color:#d5e2f4;margin-top:10px}.sub{font-size:12px;color:#c3d5ee;margin-top:6px}
+.avatar{width:46px;height:46px;border-radius:16px;background:#ffffff20;display:grid;place-items:center;font-size:22px;border:1px solid #ffffff25}
+.search{margin-top:20px;background:#ffffff20;border:1px solid #ffffff20;border-radius:16px;padding:0 14px;display:flex;align-items:center;gap:9px}
+.search input{background:transparent;border:0;outline:0;color:white;width:100%;padding:13px 0}.search input::placeholder{color:#d2dff1}
+main{padding:18px 16px 24px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:4px 2px 12px}.section-head h2{font-size:17px;margin:0;color:#173252}.muted{font-size:12px;color:var(--muted)}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}.stat{background:#fff;border-radius:18px;padding:14px 10px;box-shadow:var(--shadow);text-align:center}.stat .ico{font-size:18px}.stat strong{display:block;font-size:21px;margin:5px 0 1px;color:#19375e}.stat span{font-size:11px;color:#8292aa}
+.progress-card{background:linear-gradient(120deg,#1d4f9b,#3478e9);color:white;padding:17px;border-radius:20px;margin-bottom:22px;box-shadow:0 12px 25px #2563eb30}.progress-top{display:flex;justify-content:space-between;align-items:center;font-size:13px}.progress-top b{font-size:20px}.track{height:9px;background:#ffffff35;border-radius:20px;margin-top:13px;overflow:hidden}.fill{height:100%;width:0;background:#fff;border-radius:20px;transition:width .25s}
+.filters{display:flex;gap:8px;overflow:auto;padding:2px 0 12px;scrollbar-width:none}.filter{white-space:nowrap;border-radius:20px;padding:8px 15px;background:#e5edf9;color:#59708e;font-size:12px}.filter.active{background:var(--blue);color:#fff;box-shadow:0 5px 12px #2563eb30}
+.task-list{display:grid;gap:10px}.task{background:#fff;border:1px solid #edf1f8;border-radius:17px;padding:14px;display:flex;gap:11px;align-items:center;box-shadow:0 5px 18px #1831530b}.check{width:24px;height:24px;border:2px solid #c8d7eb;border-radius:50%;flex:none;display:grid;place-items:center;color:white;background:white;font-size:13px}.task.done .check{background:var(--blue);border-color:var(--blue)}.task.done .task-title{text-decoration:line-through;color:#9aa9bd}.task-body{min-width:0;flex:1}.task-title{font-size:14px;font-weight:750;color:#1c385d;overflow-wrap:anywhere}.task-meta{font-size:11px;color:#8a9ab0;margin-top:5px;display:flex;gap:9px;flex-wrap:wrap}.tag{font-size:10px;border-radius:20px;padding:4px 8px;background:#edf3ff;color:#3970c4}.tag.high{background:#fff0f0;color:#d35c66}.tag.low{background:#edf8f1;color:#36956b}.more{background:transparent;color:#90a0b5;font-size:20px;padding:4px}
+.empty{text-align:center;padding:35px 15px;color:#8192aa;background:#fff;border-radius:18px}.empty .big{font-size:34px;margin-bottom:8px}
+.fab{position:fixed;bottom:84px;left:max(22px,calc((100vw - 520px)/2 + 22px));width:56px;height:56px;border-radius:20px;background:var(--blue);color:white;font-size:29px;box-shadow:0 9px 22px #2563eb55;z-index:5}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);height:76px;background:#ffffffed;backdrop-filter:blur(15px);border-top:1px solid #e5ebf5;display:flex;justify-content:space-around;align-items:center;padding-bottom:env(safe-area-inset-bottom);z-index:6}
+.nav button{background:none;color:#91a1b7;font-size:10px;display:grid;gap:4px;justify-items:center;min-width:62px}.nav button .ni{font-size:21px}.nav button.active{color:var(--blue);font-weight:800}
+.page{display:none}.page.active{display:block}
+.chart{background:#fff;padding:18px;border-radius:20px;box-shadow:var(--shadow);text-align:center;margin-bottom:14px}.ring{width:148px;height:148px;border-radius:50%;margin:12px auto;display:grid;place-items:center;background:conic-gradient(var(--blue) var(--deg,0%),#e4ebf7 0)}.ring:before{content:"";width:116px;height:116px;border-radius:50%;background:white;grid-area:1/1}.ring-label{grid-area:1/1;z-index:1;font-size:26px;font-weight:850;color:#1e3d67}.ring-label small{display:block;font-size:11px;color:#7b8da8;font-weight:600}
+.form-wrap{padding:20px;background:#fff;border-radius:22px;box-shadow:var(--shadow);margin-top:18px}.field{margin:13px 0}.field label{display:block;font-size:12px;color:#60758f;margin-bottom:7px;font-weight:700}.field input,.field textarea,.field select{width:100%;border:1px solid #e3eaf5;border-radius:13px;padding:13px;background:#f7f9fd;color:#1d385d;outline:none}.field textarea{resize:vertical;min-height:75px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.primary{width:100%;background:linear-gradient(100deg,#2563eb,#315a9b);color:#fff;border-radius:15px;padding:14px;font-weight:800;margin-top:10px}.secondary{background:#edf3ff;color:#315d9f;border-radius:13px;padding:11px 14px;font-weight:700}
+.settings{background:#fff;border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center}.small{font-size:12px;color:#8495ad}
+.toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%);background:#17365e;color:white;padding:11px 18px;border-radius:30px;font-size:12px;opacity:0;pointer-events:none;transition:.25s;z-index:20}.toast.show{opacity:1}
+.modal{position:fixed;inset:0;background:#0c1b31a6;display:none;align-items:flex-end;justify-content:center;z-index:10}.modal.open{display:flex}.sheet{background:#f8faff;width:min(520px,100%);border-radius:26px 26px 0 0;padding:22px 18px 30px;max-height:90vh;overflow:auto}.sheet-head{display:flex;justify-content:space-between;align-items:center;font-weight:850;font-size:18px}.close{background:#e8eef8;border-radius:50%;width:32px;height:32px;color:#58708f}
+@media(min-width:600px){body{padding:20px 0}.app{border-radius:28px;min-height:calc(100vh - 40px);box-shadow:0 20px 70px #18315320;overflow:hidden}.top{border-radius:0 0 30px 30px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="status"><span>9:41</span><span>●  ◔  ▰</span></div>
+ <div class="toprow"><div><div class="brand">مهامي</div><div class="hello" id="greeting">مرحباً بك 👋</div><div class="sub">خطط · أنجز · حقق أهدافك ✨</div></div><div class="avatar">🔔</div></div>
+ <div class="search"><span>⌕</span><input id="search" placeholder="ابحث عن مهمة..." oninput="renderTasks()"></div>
+</header>
+<main>
+<section class="page active" id="home">
+ <div class="section-head"><h2>ملخص يومك</h2><span class="muted" id="today"></span></div>
+ <div class="summary">
+  <div class="stat"><div class="ico">🕒</div><strong id="total">0</strong><span>إجمالي المهام</span></div>
+  <div class="stat"><div class="ico">✅</div><strong id="completed">0</strong><span>مكتملة</span></div>
+  <div class="stat"><div class="ico">⭐</div><strong id="remaining">0</strong><span>متبقية</span></div>
+ </div>
+ <div class="progress-card"><div class="progress-top"><span>إنجازك اليوم</span><b id="percent">0%</b></div><div class="track"><div class="fill" id="progress"></div></div></div>
+ <div class="section-head"><h2>مهامي</h2><span class="muted" id="taskCount">0 مهمة</span></div>
+ <div class="filters">
+  <button class="filter active" data-filter="all" onclick="setFilter('all',this)">الكل</button>
+  <button class="filter" data-filter="active" onclick="setFilter('active',this)">قيد التنفيذ</button>
+  <button class="filter" data-filter="done" onclick="setFilter('done',this)">مكتملة</button>
+ </div>
+ <div class="task-list" id="tasks"></div>
+</section>
+<section class="page" id="stats">
+ <div class="section-head"><h2>الإحصائيات</h2><span class="muted">نظرة على تقدمك</span></div>
+ <div class="chart"><div class="muted">معدل الإنجاز</div><div class="ring" id="ring"><div class="ring-label" id="ringText">0%<small>معدل الإنجاز</small></div></div><div class="muted" id="statCaption">ابدأ بإضافة مهامك</div></div>
+ <div class="summary"><div class="stat"><div class="ico">🎯</div><strong id="sTotal">0</strong><span>كل المهام</span></div><div class="stat"><div class="ico">🏆</div><strong id="sDone">0</strong><span>مكتملة</span></div><div class="stat"><div class="ico">🔥</div><strong id="sRate">0%</strong><span>نسبة الإنجاز</span></div></div>
+ <div class="progress-card"><div class="progress-top"><span>استمر، أنت بتتقدم!</span><b>💙</b></div><div class="sub">كل مهمة صغيرة بتقربك من هدفك الكبير.</div></div>
+</section>
+<section class="page" id="calendar">
+ <div class="section-head"><h2>جدول مهامي</h2><span class="muted">حسب تاريخ الاستحقاق</span></div>
+ <div id="calendarList" class="task-list"></div>
+</section>
+<section class="page" id="settings">
+ <div class="section-head"><h2>الإعدادات</h2></div>
+ <div class="settings"><div><b>بياناتك محفوظة</b><div class="small">على هذا الجهاز فقط</div></div><span>🔒</span></div>
+ <div class="settings"><div><b>تثبيت التطبيق</b><div class="small">أضف مهامي إلى الشاشة الرئيسية</div></div><button class="secondary" onclick="installApp()">تثبيت</button></div>
+ <div class="settings"><div><b>إدارة المهام</b><div class="small">حذف كل المهام والبدء من جديد</div></div><button class="secondary" onclick="clearAll()">مسح الكل</button></div>
+ <p class="small" style="text-align:center;margin-top:24px">مهامي · خطط، أنجز، حقق أهدافك</p>
+</section>
+</main>
+<button class="fab" aria-label="إضافة مهمة" onclick="openModal()">+</button>
+<nav class="nav">
+ <button class="active" onclick="showPage('home',this)"><span class="ni">⌂</span>الرئيسية</button>
+ <button onclick="showPage('stats',this)"><span class="ni">▥</span>الإحصائيات</button>
+ <button onclick="showPage('calendar',this)"><span class="ni">▦</span>التقويم</button>
+ <button onclick="showPage('settings',this)"><span class="ni">⚙</span>الإعدادات</button>
+</nav>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="sheet">
+ <div class="sheet-head"><span id="modalTitle">إضافة مهمة جديدة</span><button class="close" onclick="closeModal()">×</button></div>
+ <form id="taskForm" onsubmit="saveTask(event)">
+  <input type="hidden" id="editId">
+  <div class="field"><label for="title">اسم المهمة</label><input id="title" required maxlength="90" placeholder="اكتب مهمة تحب تنجزها..."></div>
+  <div class="two"><div class="field"><label for="date">تاريخ الاستحقاق</label><input id="date" type="date"></div><div class="field"><label for="time">الوقت</label><input id="time" type="time"></div></div>
+  <div class="two"><div class="field"><label for="priority">الأولوية</label><select id="priority"><option value="medium">متوسطة</option><option value="high">عالية</option><option value="low">منخفضة</option></select></div><div class="field"><label for="category">التصنيف</label><select id="category"><option>شخصية</option><option>الدراسة</option><option>العمل</option><option>صحة</option></select></div></div>
+  <div class="field"><label for="notes">ملاحظات (اختياري)</label><textarea id="notes" placeholder="تفاصيل تساعدك..."></textarea></div>
+  <button class="primary" type="submit">حفظ المهمة</button>
+ </form>
+</div></div>
+<div class="toast" id="toast"></div>
+</div>
+<script>
+const KEY='mahamy_tasks_v1';let tasks=JSON.parse(localStorage.getItem(KEY)||'[]');let filter='all';let deferredPrompt=null;
+const $=id=>document.getElementById(id);
+const today=new Date();$('today').textContent=today.toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long'});
+$('greeting').textContent=(today.getHours()<12?'صباح الخير':'مساء الخير')+' 👋';
+function persist(){localStorage.setItem(KEY,JSON.stringify(tasks));render()}
+function setFilter(f,el){filter=f;document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderTasks()}
+function render(){renderStats();renderTasks();renderCalendar()}
+function renderStats(){let done=tasks.filter(t=>t.done).length,total=tasks.length,rate=total?Math.round(done/total*100):0;$('total').textContent=total;$('completed').textContent=done;$('remaining').textContent=total-done;$('percent').textContent=rate+'%';$('progress').style.width=rate+'%';$('ring').style.setProperty('--deg',rate+'%');$('ringText').innerHTML=rate+'%<small>معدل الإنجاز</small>';$('sTotal').textContent=total;$('sDone').textContent=done;$('sRate').textContent=rate+'%';$('statCaption').textContent=done+' من '+total+' مهام مكتملة'}
+function taskHTML(t){let p=t.priority==='high'?'عالية':t.priority==='low'?'منخفضة':'متوسطة';let cls=t.priority==='high'?'high':t.priority==='low'?'low':'';return `<article class="task ${t.done?'done':''}"><button class="check" onclick="toggleTask('${t.id}')" aria-label="تغيير حالة المهمة">${t.done?'✓':''}</button><div class="task-body"><div class="task-title">${esc(t.title)}</div><div class="task-meta"><span>▦ ${t.date||'بدون تاريخ'} ${t.time?'· '+t.time:''}</span><span class="tag ${cls}">${p}</span><span>${esc(t.category||'شخصية')}</span></div></div><button class="more" onclick="editTask('${t.id}')" aria-label="تعديل المهمة">⋮</button></article>`}
+function renderTasks(){let q=$('search').value.trim().toLowerCase();let arr=tasks.filter(t=>(filter==='all'||(filter==='done'?t.done:!t.done))&&t.title.toLowerCase().includes(q));$('taskCount').textContent=arr.length+' مهمة';$('tasks').innerHTML=arr.length?arr.sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999')).map(taskHTML).join(''):`<div class="empty"><div class="big">📝</div><b>مفيش مهام هنا لسه</b><div class="small" style="margin-top:7px">اضغط على + وأضف أول مهمة ليك</div></div>`}
+function renderCalendar(){let arr=[...tasks].sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999'));$('calendarList').innerHTML=arr.length?arr.map(taskHTML).join(''):`<div class="empty"><div class="big">📅</div>لا توجد مهام مجدولة بعد</div>`}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toggleTask(id){let t=tasks.find(x=>x.id===id);if(t){t.done=!t.done;persist();if(t.done)toast('عاش! مهمة جديدة اتنجزت ⭐')}}
+function openModal(){ $('taskForm').reset();$('editId').value='';$('modalTitle').textContent='إضافة مهمة جديدة';$('modal').classList.add('open');$('date').value=new Date().toISOString().slice(0,10);setTimeout(()=>$('title').focus(),150)}
+function closeModal(){$('modal').classList.remove('open')}
+function saveTask(e){e.preventDefault();let id=$('editId').value;let obj={id:id||Date.now().toString(),title:$('title').value.trim(),date:$('date').value,time:$('time').value,priority:$('priority').value,category:$('category').value,notes:$('notes').value,done:id?(tasks.find(t=>t.id===id)?.done||false):false};if(id)tasks=tasks.map(t=>t.id===id?obj:t);else tasks.unshift(obj);persist();closeModal();toast(id?'تم تعديل المهمة':'تمت إضافة المهمة')}
+function editTask(id){let t=tasks.find(x=>x.id===id);if(!t)return;$('editId').value=id;$('title').value=t.title;$('date').value=t.date;$('time').value=t.time;$('priority').value=t.priority;$('category').value=t.category;$('notes').value=t.notes||'';$('modalTitle').textContent='تعديل المهمة';$('modal').classList.add('open')}
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');$('search').parentElement.style.display=id==='home'?'flex':'none';$('fab').style.display=id==='home'?'block':'none'}
+function clearAll(){if(confirm('متأكد إنك عايز تمسح كل المهام؟')){tasks=[];persist();toast('تم مسح المهام')}}
+function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});
+async function installApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null}else toast('من قائمة المتصفح اختار إضافة إلى الشاشة الرئيسية')}
+$('fab').id='fab';
+render();
+</script>
+<script>if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
+</body></html>
