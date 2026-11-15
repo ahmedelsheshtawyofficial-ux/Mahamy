@@ -1,19 +1,11 @@
-# مهامي — Android APK project
-
-مشروع Android WebView يضم تطبيق مهامي داخل APK مستقل، مع الاحتفاظ بواجهة RTL والتخزين المحلي للمهام.
+# Dayflow — Android APK
+Dayflow is packaged in an Android WebView shell. GitHub Actions builds it with Java 17 and Gradle 8.9.
 
 ## Build
+1. Upload all project files to the `main` branch.
+2. Open GitHub **Actions**.
+3. Select **Build Dayflow APK** and click **Run workflow**.
+4. Download the **Dayflow-APK** artifact after the run succeeds.
 
-يتطلب Android SDK Platform 35 وJDK 17 وGradle 8.9:
-
-```bash
-gradle assembleDebug
-```
-
-الناتج: `app/build/outputs/apk/debug/app-debug.apk`
-
-## GitHub Actions
-
-ارفع هذا المشروع إلى مستودع GitHub ثم شغّل workflow المسمى **Build Mahamy APK** من تبويب Actions. سيظهر ملف APK كـ Artifact قابل للتنزيل.
-
-ملاحظة: هذا بناء debug للتثبيت والاختبار الشخصي، وليس إصدار متجر Play موقّع بمفتاح نشر خاص.
+No Expo account, EAS project, Expo token, Node.js, or Yarn is required.
+The APK is a debug build for testing, not a Play Store release.

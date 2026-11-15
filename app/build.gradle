@@ -1,11 +1,9 @@
 plugins { id 'com.android.application' }
-
 android {
-    namespace 'com.mahamy.app'
+    namespace 'com.dayflow.productivity'
     compileSdk 35
-
     defaultConfig {
-        applicationId 'com.mahamy.app'
+        applicationId 'com.dayflow.productivity'
         minSdk 23
         targetSdk 35
         versionCode 1
